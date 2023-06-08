@@ -28,6 +28,7 @@ body{
   font-weight: 200;
   font-size: 1.6rem;
   color: var(--texts-color);
+  position: relative;
 }
 
 
@@ -35,3 +36,7 @@ body{
   max-width: 1440px;
   margin: 0 auto;
 }
+
+/* .app{
+  position: relative;
+} */
