@@ -1,15 +1,14 @@
-import './App.css'
-import LandingNav from './components/LandingNav/LandingNav';
-import LandingHero from './components/LandingHero/LandingHero';
+import "./App.css";
+import LandingNav from "./components/LandingNav/LandingNav";
+import LandingHero from "./components/LandingHero/LandingHero";
 
 function App() {
-
   return (
-    <div className='app'>
+    <div className="app">
       <LandingNav />
       <LandingHero />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

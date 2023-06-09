@@ -7,14 +7,15 @@
   box-sizing: border-box;
 }
 
-html{
+html {
   font-size: 62.5%;
 }
 
-html, body{
+html,
+body {
   overflow-x: hidden;
 }
-:root{
+:root {
   --color-blue-dark: #0c0c22;
   --color-blue-light: #0b2056;
   --heading-color: #232f55;
@@ -23,14 +24,13 @@ html, body{
   --color-white: #fff;
 }
 
-body{
-  font-family: 'Mulish', sans-serif;
+body {
+  font-family: "Mulish", sans-serif;
   font-weight: 200;
   font-size: 1.6rem;
   color: var(--texts-color);
   position: relative;
 }
-
 
 #root {
   max-width: 1440px;
