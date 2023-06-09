@@ -1,7 +1,6 @@
-import heroImg from "../../assets/note-taking.svg";
 import { motion } from "framer-motion";
 import "./LandingHero.css";
-const LandingHero = () => {
+const LandingHero = ({ mainTitle, descriptionText, image }) => {
   return (
     <section className="landing-hero">
       <div className="landing-hero__left">
@@ -11,7 +10,7 @@ const LandingHero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
         >
-          Securely store and organize your study notes
+          {mainTitle}
         </motion.h2>
         <motion.p
           className="landing-hero__left--text"
@@ -19,9 +18,7 @@ const LandingHero = () => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1 }}
         >
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam tempora
-          et sed quas aspernatur, perspiciatis repudiandae quasi molestiae
-          explicabo ducimus?
+          {descriptionText}
         </motion.p>
         <motion.a
           href=""
@@ -29,20 +26,22 @@ const LandingHero = () => {
           initial={{ opacity: 0, y: 100 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
+          whileTap={{ scale: 0.9 }}
         >
           Get started
         </motion.a>
       </div>
 
       <motion.img
-        src={heroImg}
+        src={image}
         alt="note taking"
         className="landing-hero__image"
-        initial={{ x: 500 }}
-        animate={{ x: 0 }}
-        transition={{ duration: 1 }}
+        // initial={{ x: 500 }}
+        // animate={{ x: 0 }}
+        // transition={{ duration: 1 }}
+        animate={{ scale: [1, 1.01, 1] }}
+        transition={{ duration: 1.5, repeat: Infinity, repeatType: "loop" }}
       />
-      <h2></h2>
     </section>
   );
 };
