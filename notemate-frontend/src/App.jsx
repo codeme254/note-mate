@@ -1,18 +1,19 @@
 import "./App.css";
-import LandingNav from './components/LandingNav/LandingNav';
-import LandingHeroMain from './components/LandingHero/LandingHeroMain';
-import Features from "./components/Features/Features";
-import About from "./components/About/About";
-import Footer from "./components/Footer/Footer";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import LandingPage from "./pages/LandingPage/LandingPage";
+import SignUp from "./pages/SignUp/SignUp";
+import Login from "./pages/Login/Login";
 
 function App() {
   return (
     <div className="app">
-      <LandingNav />
-      <LandingHeroMain />
-      <About />
-      <Features />
-      <Footer />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/sign-up" element={<SignUp />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

@@ -2,6 +2,7 @@ import "./LandingNav.css";
 import {HiOutlineMenuAlt1} from 'react-icons/hi';
 import {AiOutlineCloseCircle} from 'react-icons/ai';
 import { useState, useRef } from "react";
+import { Link } from 'react-router-dom';
 const LandingNav = () => {
   const navRef = useRef(null);
   const [navIsActive, setNavIsActive] = useState(false);
@@ -31,18 +32,18 @@ const LandingNav = () => {
           </li>
           <li className="landing-nav__cta">
             <div>
-              <a
-                href=""
+              <Link
+                to="/sign-up"
                 className="landing-nav__cta-btn landing-nav__cta-btn-pri"
               >
                 sign up (free)
-              </a>
-              <a
-                href=""
+              </Link>
+              <Link
+                to="/login"
                 className="landing-nav__cta-btn landing-nav__cta-btn-sec"
               >
                 log in
-              </a>
+              </Link>
             </div>
           </li>
         </ol>
