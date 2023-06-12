@@ -7,11 +7,6 @@
   padding: 3rem 5vw;
 }
 
-/* .landing-hero__left{
-    flex-basis: 80%;
-    flex-grow: 1.5;
-} */
-
 .landing-hero__image {
   --size: 60rem;
   display: block;
@@ -20,6 +15,7 @@
   min-width: var(--size);
   height: 40rem;
   border-right: 1px solid #666;
+  z-index: 5;
 }
 
 .landing-hero__left--heading {
@@ -46,4 +42,17 @@
   font-weight: 700;
   border-radius: 100px;
   text-transform: capitalize;
+}
+
+@media screen and (max-width: 750px) {
+  .landing-hero{
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .landing-hero__image{
+    width: 90%;
+    margin: 4rem auto;
+  }
 }
