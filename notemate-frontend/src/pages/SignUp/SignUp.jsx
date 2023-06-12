@@ -1,8 +1,13 @@
 import { Link } from 'react-router-dom';
 import "./SignUp.css";
+import { motion } from 'framer-motion';
 const SignUp = () => {
     return(
-        <div className='sign-up-container'>
+        <motion.div className='sign-up-container'
+        initial={{ x: 1000 }}
+        animate={{ x: 0 }}
+        exit={{ opacity: .2 }}
+        >
             <h2 className='form-page-title'>Create your notemate account</h2>
             <form action="" className='sign-up-form'>
                 <div className="form-group">
@@ -36,7 +41,7 @@ const SignUp = () => {
 <Link to="/" className='form-back'>Go back home</Link>
                 </div>
             </form>
-        </div>
+        </motion.div>
     )
 }
 
