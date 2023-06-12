@@ -64,3 +64,75 @@ body {
 /* .app{
   position: relative;
 } */
+
+.form-group{
+  display: grid;
+  grid-template-columns: .3fr .6fr;
+  align-content: center;
+  margin-bottom: 3rem;
+}
+
+.form-group-lable{
+  font-weight: bold;
+  color: var(--color-blue-light);
+  text-transform: capitalize;
+  font-size: 1.8rem;
+  color: var(--color-white);
+}
+
+.form-guide{
+  color: var(--color-blue-light);
+  font-weight: bold;
+  color: var(--color-white);
+}
+
+.form-text-input{
+  padding: 1.5rem 2rem;
+  border-radius: 5px;
+  caret-color: var(--color-secondary);
+  font-weight: bold;
+  border: none;
+}
+
+.form-text-input::placeholder{
+  text-transform: capitalize;
+  font-weight: bold;
+}
+
+.form-guide a{
+  text-transform: capitalize;
+  color: var(--color-white);
+}
+
+.form-btn{
+  padding: 2rem 4rem;
+  border: none;
+  outline: none;
+  font-weight: bold;
+  text-transform: capitalize;
+  font-weight: bold;
+  color: var(--color-white);
+  background-color: var(--color-secondary);
+  cursor: pointer;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+}
+
+.form-page-title{
+  margin-bottom: 2rem;
+  color: var(--color-blue-dark);
+  text-transform: capitalize;
+  text-align: center;
+  color: var(--color-white);
+}
+
+.form-back{
+  font-weight: bold;
+  color: var(--color-white);
+}
+
+.form-bottom-controls{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
