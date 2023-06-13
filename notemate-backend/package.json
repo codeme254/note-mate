@@ -1,0 +1,23 @@
+{
+  "name": "notemate-backend",
+  "version": "1.0.0",
+  "description": "api for notemate",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server.js"
+  },
+  "keywords": [
+    "note-mate"
+  ],
+  "author": "codeme254",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.1.4",
+    "express": "^4.18.2",
+    "mssql": "^9.1.1"
+  }
+}
