@@ -142,7 +142,7 @@ export const editUserInformation = async (req, res) => {
         res.status(409).json({ message: "Email address already taken" });
         return;
       }
-      
+
       const update = pool
         .request()
         .input("firstName", sql.VarChar, firstName)
@@ -169,6 +169,22 @@ export const editUserInformation = async (req, res) => {
   }
 };
 
-export const deleteUserInformation = (req, res) => {
-  res.send("Delete user using this route");
+export const deleteUserInformation = async (req, res) => {
+  const { username } = req.params;
+  
+  try {
+    const userExists = await checkIfUserExists(username);
+    if (userExists){
+      const deleteUser = await pool.request()
+      .input("username", sql.VarChar, username)
+      .query("DELETE FROM users WHERE username = @username")
+      res.status(200).json({ message: "account deleted successfully" })
+    } else {
+      res.status(404).json({ message: `User with username ${username} does not exist` })
+    }
+  } catch (e) {
+    res.json(400).json({ message: "An error occured while attempting to delete" })
+  } finally {
+    sql.close()
+  }
 };
