@@ -57,6 +57,7 @@ const checkIfUserExists = async (username) => {
       .request()
       .input("username", sql.VarChar, username)
       .query("SELECT * FROM users WHERE username = @username");
+    console.log(`we found ${user.recordset.length} users`);
     if (user.recordset.length === 0) {
       return false;
     } else {
@@ -120,8 +121,6 @@ export const createUser = async (req, res) => {
       res.status(201).json({ message: "User created successfully" });
     }
   } catch (e) {
-    console.log("==========Error==================");
-    console.log(e);
     res
       .status(400)
       .json({ message: "an error occured when creating the user" });
@@ -130,8 +129,44 @@ export const createUser = async (req, res) => {
   }
 };
 
-export const editUserInformation = (req, res) => {
-  res.send("Update user information using this route");
+export const editUserInformation = async (req, res) => {
+  const { username } = req.params;
+  try {
+    // check if the user to be updated indeed exists
+    const userExists = await checkIfUserExists(username);
+    if (userExists) {
+      const { firstName, lastName, emailAddress, username, password } =
+        req.body;
+      const newEmailExists = await checkIfEmailIsTaken(emailAddress);
+      if (newEmailExists) {
+        res.status(409).json({ message: "Email address already taken" });
+        return;
+      }
+      
+      const update = pool
+        .request()
+        .input("firstName", sql.VarChar, firstName)
+        .input("lastName", sql.VarChar, lastName)
+        .input("emailAddress", sql.VarChar, emailAddress)
+        .input("username", sql.VarChar, username)
+        .query(
+          "UPDATE users SET firstName = @firstName, lastName = @lastName, emailAddress = @emailAddress WHERE username = @username"
+        );
+      res
+        .status(200)
+        .json({ message: `Information about ${username} has been updated` });
+    } else {
+      res
+        .status(404)
+        .json({ message: `There is no user with the username ${username}` });
+    }
+  } catch (e) {
+    res
+      .status(400)
+      .json({ message: "An error occured while trying to update user" });
+  } finally {
+    sql.close();
+  }
 };
 
 export const deleteUserInformation = (req, res) => {
