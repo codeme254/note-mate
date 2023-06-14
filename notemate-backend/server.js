@@ -1,5 +1,5 @@
 import express from 'express';
-import config from "./db/config.js";
+import { config } from "./db/config.js";
 import bodyParser from 'body-parser';
 import userRoutes from './routes/userRoutes.js';
 

@@ -19,7 +19,7 @@ const sqlEncrypt = process.env.SQL_ENCRYPT === "true";
 assert(PORT, "port is required");
 assert(HOST, "host is required");
 
-const config = {
+export const config = {
   host: HOST,
   port: PORT,
   url: HOST_URL,
@@ -34,5 +34,3 @@ const config = {
     },
   },
 };
-
-export default config;
