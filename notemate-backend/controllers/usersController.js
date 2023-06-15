@@ -1,9 +1,11 @@
 // import the sql object from the 'mssql' module/library
 import sql from "mssql";
 import { config } from "../db/config.js";
+import bcrypt from 'bcrypt';
 
 const pool = new sql.ConnectionPool(config.sql);
 await pool.connect();
+const bcryptSalt = bcrypt.genSaltSync(10);
 
 export const getAllUsers = async (req, res) => {
   try {
@@ -14,7 +16,7 @@ export const getAllUsers = async (req, res) => {
     if (users.recordsets[0].length === 0) {
       res.status(404).json({ error: "No users found." });
     } else {
-      res.status(200).json(users.recordsets[0]);
+      res.status(200).json(users.recordsets[0])
     }
   } catch (e) {
     res
@@ -95,7 +97,7 @@ const checkIfEmailIsTaken = async (emailAddress) => {
 
 export const createUser = async (req, res) => {
   try {
-    const { firstName, lastName, emailAddress, username, password } = req.body;
+    let { firstName, lastName, emailAddress, username, password } = req.body;
     const userExists = await checkIfUserExists(username);
     const emailExists = await checkIfEmailIsTaken(emailAddress);
     if (userExists) {
@@ -108,6 +110,7 @@ export const createUser = async (req, res) => {
       });
     } else {
       // let pool = await sql.connect(config.sql);
+      password = bcrypt.hashSync(password, bcryptSalt);
       const creatUser = pool
         .request()
         .input("firstName", sql.VarChar, firstName)

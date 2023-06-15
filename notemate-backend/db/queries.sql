@@ -11,6 +11,8 @@ CREATE TABLE users(
 );
 
 INSERT INTO users (firstName, lastName, emailAddress, username, password)
+
+
 VALUES
     ('John', 'Doe', 'john.doe@example.com', 'johndoe', 'password1'),
     ('Jane', 'Smith', 'jane.smith@example.com', 'janesmith', 'password2'),
@@ -35,3 +37,7 @@ VALUES
 
 -- GET ALL USERS
 SELECT * FROM users;
+
+use notemate
+ALTER TABLE users
+ALTER COLUMN password VARCHAR(255);
