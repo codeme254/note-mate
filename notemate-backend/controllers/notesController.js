@@ -1,3 +1,8 @@
+import sql from 'mssql';
+import { config } from '../db/config.js';
+const pool = new sql.ConnectionPool(config.sql)
+await pool.connect()
+
 export const getNotes = (req, res) => {
   res.send("Get all notes using this route");
 };

@@ -1,5 +1,20 @@
 CREATE DATABASE notemate;
 USE notemate;
+
+-- a table for storing the notes,
+-- username, title, synopsis, claps, body, dateCreated, lastUpdated
+
+CREATE TABLE notes (
+	username VARCHAR(50) NOT NULL,
+	title VARCHAR(80) NOT NULL,
+	synopsis VARCHAR(500) NOT NULL, 
+	body VARCHAR(5000) NOT NULL,
+	claps INT DEFAULT 2,
+	dateCreated DATETIME DEFAULT GETDATE(),
+	lastUpdated DATETIME DEFAULT GETDATE(),
+	FOREIGN KEY (username) REFERENCES users (username)
+);
+
 -- A table for storing all the users
 CREATE TABLE users(
 	firstName VARCHAR(50) NOT NULL,
@@ -41,3 +56,12 @@ SELECT * FROM users;
 use notemate
 ALTER TABLE users
 ALTER COLUMN password VARCHAR(255);
+
+-- username, title, synopsis, claps, body, dateCreated, lastUpdated
+
+
+
+INSERT INTO notes (username, title, synopsis, body) VALUES ('gracebaker', 'running sql in azure', 'explores how to run sql in azure', 'running sql in azure is great');
+INSERT INTO notes (username, title, synopsis, body) VALUES ('sophiehill', 'How to fix your bicycle', 'Learning how simple it can be to fix your bicycle', 'Fixing a bicycle is very easy, you will need the follwing equipments');
+
+SELECT * FROM notes;
