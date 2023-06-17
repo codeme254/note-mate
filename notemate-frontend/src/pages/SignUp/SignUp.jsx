@@ -2,15 +2,56 @@ import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import "./SignUp.css";
 import { motion } from "framer-motion";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const SignUp = () => {
+  const schema = yup.object().shape({
+    firstName: yup
+      .string()
+      .required("First name is required")
+      .min(3, "First name must be at least 3 characters long"),
+    lastName: yup
+      .string()
+      .required("Last name is required")
+      .min(3, "Last name must be at least 3 characters long"),
+    username: yup
+      .string()
+      .required("username is required")
+      .min(3, "username must be at least 3 characters long"),
+    emailAddress: yup
+      .string()
+      .email("Email should be in a valid format")
+      .required("Email is required"),
+    password: yup
+      .string()
+      .required("Password is required")
+      .min(8, "Password should be a minimum of 8 characters long"),
+    confpass: yup
+      .string()
+      .oneOf(
+        [yup.ref("password"), null],
+        "Password and confirm password must match"
+      ),
+  });
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
+
   const onSubmit = (data) => {
     console.log(data);
+    toast.success("Account created successfully");
+  };
+
+  const notify = (errMessage) => {
+    toast.error(errMessage);
   };
   return (
     <motion.div
@@ -37,6 +78,7 @@ const SignUp = () => {
             id="firstName"
             {...register("firstName", { required: true })}
           />
+          {errors.firstName && notify(errors.firstName?.message)}
         </div>
         <div className="form-group">
           <label htmlFor="lastName" className="form-group-lable">
@@ -49,6 +91,7 @@ const SignUp = () => {
             id="lastName"
             {...register("lastName", { required: true })}
           />
+          {errors.lastName && notify(errors.lastName?.message)}
         </div>
         <div className="form-group">
           <label htmlFor="emailAddress" className="form-group-lable">
@@ -61,6 +104,7 @@ const SignUp = () => {
             id="emailAddress"
             {...register("emailAddress", { required: true })}
           />
+          {errors.emailAddress && notify(errors.emailAddress?.message)}
         </div>
         <div className="form-group">
           <label htmlFor="username" className="form-group-lable">
@@ -73,6 +117,7 @@ const SignUp = () => {
             id="username"
             {...register("username", { required: true })}
           />
+          {errors.username && notify(errors.username?.message)}
         </div>
         <div className="form-group">
           <label htmlFor="password" className="form-group-lable">
@@ -85,6 +130,7 @@ const SignUp = () => {
             id="password"
             {...register("password", { required: true })}
           />
+          {errors.password && notify(errors.password?.message)}
         </div>
         <div className="form-group">
           <label htmlFor="confpass" className="form-group-lable">
@@ -97,6 +143,7 @@ const SignUp = () => {
             id="confpass"
             {...register("confpass", { required: true })}
           />
+          {errors.confpass && notify(errors.confpass?.message)}
         </div>
         <div className="form-bottom-controls">
           <button type="submit" className="form-btn">
