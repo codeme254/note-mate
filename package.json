@@ -1,0 +1,17 @@
+{
+  "name": "note-mate",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "spin-frontend": "cd notemate-frontend && npm run dev",
+    "spin-backend": "cd notemate-backend && npm run dev",
+    "full-throttle": "concurrently \"npm run spin-frontend\" \"npm run spin-backend\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  }
+}

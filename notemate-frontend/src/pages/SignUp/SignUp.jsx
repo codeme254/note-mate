@@ -45,9 +45,19 @@ const SignUp = () => {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (data) => {
-    console.log(data);
-    toast.success("Account created successfully");
+  const onSubmit = async (data) => {
+    const response = await fetch("http://localhost:8081/users", {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: { "Content-Type": "application/json" },
+    });
+    const responseData = await response.json();
+    console.log(responseData);
+    if (response.status === 201) {
+      toast.success(responseData.message);
+    } else {
+      toast.info(responseData.message);
+    }
   };
 
   const notify = (errMessage) => {

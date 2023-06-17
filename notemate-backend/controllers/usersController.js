@@ -121,7 +121,7 @@ export const createUser = async (req, res) => {
         .query(
           "INSERT INTO users (firstName, lastName, emailAddress, username, password) VALUES (@firstName, @lastName, @emailAddress, @username, @password)"
         );
-      res.status(201).json({ message: "User created successfully" });
+      res.status(201).json({ message: `Account for ${firstName} created successfuly` });
     }
   } catch (e) {
     res
