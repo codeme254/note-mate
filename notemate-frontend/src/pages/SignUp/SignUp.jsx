@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import "./SignUp.css";
 import { motion } from "framer-motion";
@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const SignUp = () => {
+  const navigate = useNavigate()
   const schema = yup.object().shape({
     firstName: yup
       .string()
@@ -55,6 +56,7 @@ const SignUp = () => {
     console.log(responseData);
     if (response.status === 201) {
       toast.success(responseData.message);
+      navigate("/feed")
     } else {
       toast.info(responseData.message);
     }
