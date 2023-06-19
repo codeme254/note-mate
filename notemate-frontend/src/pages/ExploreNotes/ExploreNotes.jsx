@@ -1,9 +1,10 @@
 import HomeFeedNav from "../../components/HomeFeedNav/HomeFeedNav";
-const HomeFeed = () => {
+const ExploreNotes = () => {
   return (
     <>
       <HomeFeedNav />
+      <h3>Explore all notes from here</h3>
     </>
   );
 };
-export default HomeFeed;
+export default ExploreNotes;

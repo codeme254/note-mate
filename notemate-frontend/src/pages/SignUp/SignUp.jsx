@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const SignUp = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const schema = yup.object().shape({
     firstName: yup
       .string()
@@ -56,7 +56,7 @@ const SignUp = () => {
     console.log(responseData);
     if (response.status === 201) {
       toast.success(responseData.message);
-      navigate("/feed")
+      navigate("/explore-notes");
     } else {
       toast.info(responseData.message);
     }

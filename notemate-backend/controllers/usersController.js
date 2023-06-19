@@ -1,7 +1,7 @@
 // import the sql object from the 'mssql' module/library
 import sql from "mssql";
 import { config } from "../db/config.js";
-import bcrypt from 'bcrypt';
+import bcrypt from "bcrypt";
 
 const pool = new sql.ConnectionPool(config.sql);
 await pool.connect();
@@ -16,7 +16,7 @@ export const getAllUsers = async (req, res) => {
     if (users.recordsets[0].length === 0) {
       res.status(404).json({ error: "No users found." });
     } else {
-      res.status(200).json(users.recordsets[0])
+      res.status(200).json(users.recordsets[0]);
     }
   } catch (e) {
     res
@@ -121,7 +121,9 @@ export const createUser = async (req, res) => {
         .query(
           "INSERT INTO users (firstName, lastName, emailAddress, username, password) VALUES (@firstName, @lastName, @emailAddress, @username, @password)"
         );
-      res.status(201).json({ message: `Account for ${firstName} created successfuly` });
+      res
+        .status(201)
+        .json({ message: `Account for ${firstName} created successfuly` });
     }
   } catch (e) {
     res
@@ -174,20 +176,25 @@ export const editUserInformation = async (req, res) => {
 
 export const deleteUserInformation = async (req, res) => {
   const { username } = req.params;
-  
+
   try {
     const userExists = await checkIfUserExists(username);
-    if (userExists){
-      const deleteUser = await pool.request()
-      .input("username", sql.VarChar, username)
-      .query("DELETE FROM users WHERE username = @username")
-      res.status(200).json({ message: "account deleted successfully" })
+    if (userExists) {
+      const deleteUser = await pool
+        .request()
+        .input("username", sql.VarChar, username)
+        .query("DELETE FROM users WHERE username = @username");
+      res.status(200).json({ message: "account deleted successfully" });
     } else {
-      res.status(404).json({ message: `User with username ${username} does not exist` })
+      res
+        .status(404)
+        .json({ message: `User with username ${username} does not exist` });
     }
   } catch (e) {
-    res.json(400).json({ message: "An error occured while attempting to delete" })
+    res
+      .json(400)
+      .json({ message: "An error occured while attempting to delete" });
   } finally {
-    sql.close()
+    sql.close();
   }
 };

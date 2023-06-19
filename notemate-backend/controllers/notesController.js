@@ -24,11 +24,9 @@ export const getNotes = async (req, res) => {
       res.status(200).json(notes.recordset);
     }
   } catch (error) {
-    res
-      .status(400)
-      .json({
-        message: "An error was encountered while attempting this operation",
-      });
+    res.status(400).json({
+      message: "An error was encountered while attempting this operation",
+    });
   }
 };
 
@@ -47,11 +45,9 @@ export const getNote = async (req, res) => {
       res.status(200).json(note);
     }
   } catch (error) {
-    res
-      .status(400)
-      .json({
-        message: "An error was encountered while trying to retrieve that note",
-      });
+    res.status(400).json({
+      message: "An error was encountered while trying to retrieve that note",
+    });
   }
 };
 

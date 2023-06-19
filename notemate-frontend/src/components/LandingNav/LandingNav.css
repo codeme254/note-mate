@@ -8,7 +8,7 @@
   position: relative;
 }
 
-.menu-icon{
+.menu-icon {
   --size: 8rem;
   width: var(--size);
   height: var(--size);
@@ -25,7 +25,7 @@
   transition: all 1s ease;
 }
 
-.menu-icon svg{
+.menu-icon svg {
   --size: 5rem;
   width: var(--size);
   height: var(--size);
@@ -103,38 +103,38 @@
 }
 
 @media screen and (max-width: 600px) {
-  .landing-nav__nav-list{
+  .landing-nav__nav-list {
     flex-direction: column;
   }
 
-  .menu-icon{
+  .menu-icon {
     display: flex;
   }
 
-  .landing-nav__nav{
+  .landing-nav__nav {
     position: absolute;
     top: 15vh;
     right: 5px;
     background-color: var(--color-secondary);
-    padding: 3rem .5rem;
+    padding: 3rem 0.5rem;
     height: 100vh;
     width: 100vw;
     transition: all 1s ease;
     z-index: 10;
   }
 
-  .landing-nav-abs{
+  .landing-nav-abs {
     transition: all 1s ease;
   }
 
-  .landing-nav-abs{
+  .landing-nav-abs {
     position: absolute;
     top: 15vh;
     transform: translateX(900px);
     z-index: 10;
   }
 
-  .landing-nav__header{
+  .landing-nav__header {
     align-items: center;
     justify-content: space-between;
     padding: 2rem;

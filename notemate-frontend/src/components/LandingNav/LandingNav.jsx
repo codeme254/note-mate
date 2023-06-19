@@ -1,18 +1,20 @@
 import "./LandingNav.css";
-import {HiOutlineMenuAlt1} from 'react-icons/hi';
-import {AiOutlineCloseCircle} from 'react-icons/ai';
+import { HiOutlineMenuAlt1 } from "react-icons/hi";
+import { AiOutlineCloseCircle } from "react-icons/ai";
 import { useState, useRef } from "react";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 const LandingNav = () => {
   const navRef = useRef(null);
   const [navIsActive, setNavIsActive] = useState(false);
-  const [icon, setIcon] = useState(null)
-  
+  const [icon, setIcon] = useState(null);
+
   const handleToggleNav = () => {
-    setNavIsActive(!navIsActive)
-    navIsActive ? navRef.current.classList.remove("landing-nav-abs") : navRef.current.classList.add("landing-nav-abs");
-    navIsActive ? setIcon(AiOutlineCloseCircle) : setIcon(HiOutlineMenuAlt1)
-  }
+    setNavIsActive(!navIsActive);
+    navIsActive
+      ? navRef.current.classList.remove("landing-nav-abs")
+      : navRef.current.classList.add("landing-nav-abs");
+    navIsActive ? setIcon(AiOutlineCloseCircle) : setIcon(HiOutlineMenuAlt1);
+  };
   return (
     <header className="landing-nav__header">
       <h2 className="logo">Notemate</h2>
