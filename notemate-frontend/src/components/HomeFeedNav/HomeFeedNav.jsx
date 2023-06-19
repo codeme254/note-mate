@@ -13,7 +13,7 @@ const HomeFeedNav = () => {
       <nav className="home-feed-nav__nav">
         <div className="home-feed-nav__nav--links">
           <LinkIcon to="/explore-notes" label="explore" icon={<GiRead />} />
-          <LinkIcon to="" label="new note" icon={<BsPencilSquare />} />
+          <LinkIcon to="/studio" label="new note" icon={<BsPencilSquare />} />
           <LinkIcon to="" label="my notes" icon={<FiBookOpen />} />
           <LinkIcon to="" label="my account" icon={<RiAccountCircleFill />} />
           <LinkIcon

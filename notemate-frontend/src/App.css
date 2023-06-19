@@ -48,6 +48,19 @@ body {
   --color-white: #fff;
 }
 
+.u-dark-fix{
+  color: var(--color-blue-dark)!important;
+}
+
+.u-input-border-fix{
+  border: 2px solid var(--color-blue-dark)!important;
+}
+
+.input-placeholder-fix::placeholder{
+  text-transform: none!important;
+  font-style: italic;
+}
+
 body {
   font-family: "Mulish", sans-serif;
   font-weight: 200;
@@ -136,13 +149,4 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-}
-
-.editor {
-  min-height: 100vh;
-}
-
-.editing-area {
-  min-height: 80vh;
-  background-color: #777;
 }
