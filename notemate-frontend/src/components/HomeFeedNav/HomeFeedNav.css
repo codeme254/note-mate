@@ -39,6 +39,18 @@
   border-radius: 3px;
 }
 
+.home-feed__user--initials {
+  --size: 4rem;
+  width: var(--size);
+  height: var(--size);
+  background-color: var(--color-secondary);
+  color: var(--color-white);
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .feed__nav-link:hover {
   border-bottom: 2px solid var(--color-secondary);
   background-color: var(--color-secondary);

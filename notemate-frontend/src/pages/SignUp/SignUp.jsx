@@ -1,5 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { UserContext } from "../../Helpers/Context";
+import { useContext } from "react";
 import "./SignUp.css";
 import { motion } from "framer-motion";
 import * as yup from "yup";
@@ -8,6 +10,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const SignUp = () => {
+  const { username, setUsername } = useContext(UserContext);
   const navigate = useNavigate();
   const schema = yup.object().shape({
     firstName: yup
@@ -53,9 +56,10 @@ const SignUp = () => {
       headers: { "Content-Type": "application/json" },
     });
     const responseData = await response.json();
-    console.log(responseData);
+    // console.log(responseData);
     if (response.status === 201) {
       toast.success(responseData.message);
+      setUsername(data.username);
       navigate("/explore-notes");
     } else {
       toast.info(responseData.message);

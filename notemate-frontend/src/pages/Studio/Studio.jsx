@@ -1,5 +1,7 @@
 import ReactQuill from "react-quill";
 import { Link } from "react-router-dom";
+import { UserContext } from "../../Helpers/Context";
+import { useContext } from "react";
 import "react-quill/dist/quill.snow.css";
 import { useState, useRef, useEffect } from "react";
 import HomeFeedNav from "../../components/HomeFeedNav/HomeFeedNav";
@@ -36,15 +38,18 @@ const formats = [
 
 const Studio = () => {
   const [value, setValue] = useState("");
-  const quillRef = useRef(null)
+  const quillRef = useRef(null);
+  const { username, setUserName } = useContext(UserContext);
   useEffect(() => {
-    quillRef.current.focus()
-  }, [])
+    quillRef.current.focus();
+  }, []);
   return (
     <>
       <HomeFeedNav />
       <div className="studio__container">
-        <h2 className="studio__container--title">write your notes</h2>
+        <h2 className="studio__container--title">
+          write your notes {username}
+        </h2>
         <form action="">
           <div className="form-group">
             <label
@@ -74,7 +79,7 @@ const Studio = () => {
             />
           </div>
           <div>
-          <label htmlFor="synopsis" className="form-group-lable u-dark-fix">
+            <label htmlFor="synopsis" className="form-group-lable u-dark-fix">
               Write your notes
             </label>
             <ReactQuill
