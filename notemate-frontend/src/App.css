@@ -48,6 +48,13 @@ body {
   --color-white: #fff;
 }
 
+.u-center{
+  text-align: center;
+  text-transform: capitalize;
+  text-decoration: underline;
+  color: var(--color-secondary);
+}
+
 .u-dark-fix {
   color: var(--color-blue-dark) !important;
 }

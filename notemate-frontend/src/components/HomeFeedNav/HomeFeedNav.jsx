@@ -15,20 +15,14 @@ const HomeFeedNav = () => {
   const [userData, setUserData] = useState({});
   useEffect(() => {
     const getUser = async () => {
-      console.log(`The username is ${username}`);
       const user = await fetch(`http://localhost:8081/users/${username}`);
       const userData = await user.json();
-      console.log("--------------");
-      console.log(userData);
-      console.log("------------");
       setUserData(userData);
     };
     getUser();
   }, []);
   return (
     <header className="home-feed-nav">
-      {console.log("This is the user data: ")}
-      {console.log(userData)}
       <h2 className="home-feed-nav__logo">NoteMate</h2>
       <nav className="home-feed-nav__nav">
         <div className="home-feed-nav__nav--links">
