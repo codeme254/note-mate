@@ -12,6 +12,7 @@ const {
   SQL_USER,
   SQL_PWD,
   SQL_DB,
+  JWT_SALT
 } = process.env;
 
 const sqlEncrypt = process.env.SQL_ENCRYPT === "true";
@@ -33,4 +34,6 @@ export const config = {
       enableArithAbort: true,
     },
   },
+
+  jwtSalt: JWT_SALT,
 };

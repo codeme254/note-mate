@@ -18,7 +18,6 @@ const getUserFullName = async (username) => {
     lastName: userData.lastName,
   };
 };
-console.log(await getUserFullName("gracebaker"));
 
 const ExploreNotes = () => {
   const [notes, setNotes] = useState([]);
@@ -73,7 +72,7 @@ const ExploreNotes = () => {
           bodyPreview="Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit recusandae ut numquam et? Esse earum porro voluptatibus numquam delectus ad modi aut, ipsam eius, optio atque non odio est eos."
           username="zaphdev"
           datePosted={new Date().toDateString()}
-          initials = "DO"
+          initials="DO"
         />
 
         {notes.length > 0 ? (

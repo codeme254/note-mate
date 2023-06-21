@@ -1,4 +1,9 @@
-import { AiOutlineSave, AiOutlineLike, AiOutlineFilePdf, AiOutlineDownload } from "react-icons/ai";
+import {
+  AiOutlineSave,
+  AiOutlineLike,
+  AiOutlineFilePdf,
+  AiOutlineDownload,
+} from "react-icons/ai";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import "./NotesPreview.css";
 import NotesPDF from "./NotesPDF";
@@ -29,7 +34,10 @@ const NotesPreview = ({
           </p>
           <h3 className="notes-preview__title">{title}</h3>
           <p className="notes-preview__synopsis">{synposis}</p>
-          <p className="notes-preview__body-preview">{bodyPreview}</p>
+          <p
+            className="notes-preview__body-preview"
+            dangerouslySetInnerHTML={{ __html: bodyPreview }}
+          />
           <div className="notes-controls">
             <button className="notes-controls__control">
               <AiOutlineLike />
@@ -52,7 +60,9 @@ const NotesPreview = ({
               >
                 <AiOutlineFilePdf />
                 <AiOutlineDownload />
-                {({loading}) => (loading ? <p>Loading document...</p> : <p>Download as pdf</p>)}
+                {({ loading }) =>
+                  loading ? <p>Loading document...</p> : <p>Download as pdf</p>
+                }
               </PDFDownloadLink>
               {/* <p>Download as pdf</p> */}
             </button>

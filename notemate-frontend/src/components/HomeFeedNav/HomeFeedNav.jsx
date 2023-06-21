@@ -12,14 +12,21 @@ import { FaPeopleCarry } from "react-icons/Fa";
 
 const HomeFeedNav = () => {
   const { username, setUsername } = useContext(UserContext);
-  const [userData, setUserData] = useState({});
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   useEffect(() => {
-    const getUser = async () => {
-      const user = await fetch(`http://localhost:8081/users/${username}`);
-      const userData = await user.json();
-      setUserData(userData);
+    const fetchUserProfile = async () => {
+      const profile = await fetch("http://localhost:8081/profile", {
+        credentials: "include",
+        method: "GET",
+      });
+      const userProfile = await profile.json();
+      // console.log(userProfile.username)
+      setUsername(userProfile.username);
+      setFirstName(userProfile.firstName);
+      setLastName(userProfile.lastName);
     };
-    getUser();
+    fetchUserProfile();
   }, []);
   return (
     <header className="home-feed-nav">
@@ -41,9 +48,10 @@ const HomeFeedNav = () => {
       <div className="home-feed-nav__user">
         <div className="home-feed__user">
           <div className="home-feed__user--initials">
-            {userData && userData.firstName && userData.lastName
+            {/* {userData && userData.firstName && userData.lastName
               ? `${userData.firstName.charAt(0)}${userData.lastName.charAt(0)}`
-              : null}
+              : null} */}
+            {firstName && lastName ? `${firstName[0]}${lastName[0]}` : null}
           </div>
           <p className="home-feed__user--name">{username}</p>
         </div>

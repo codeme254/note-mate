@@ -60,7 +60,7 @@ const SignUp = () => {
     if (response.status === 201) {
       toast.success(responseData.message);
       setUsername(data.username);
-      navigate("/explore-notes");
+      navigate("/login");
     } else {
       toast.info(responseData.message);
     }

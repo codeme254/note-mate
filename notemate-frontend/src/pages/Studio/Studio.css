@@ -12,9 +12,10 @@
 }
 
 .editor {
-  min-height: 80vh;
+  /* min-height: 80vh; */
   border-radius: 10px;
   overflow: hidden;
+  color: #222;
 }
 
 .editing-area {

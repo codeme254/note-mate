@@ -1,7 +1,8 @@
 import ReactQuill from "react-quill";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../../Helpers/Context";
 import { useContext } from "react";
+import { toast } from "react-toastify";
 import "react-quill/dist/quill.snow.css";
 import { useState, useRef, useEffect } from "react";
 import HomeFeedNav from "../../components/HomeFeedNav/HomeFeedNav";
@@ -37,12 +38,41 @@ const formats = [
 ];
 
 const Studio = () => {
-  const [value, setValue] = useState("");
-  const quillRef = useRef(null);
   const { username, setUserName } = useContext(UserContext);
-  useEffect(() => {
-    quillRef.current.focus();
-  }, []);
+  const navigate = useNavigate();
+  const [title, setTitle] = useState("");
+  const [synopsis, setSynopsis] = useState("");
+  const [body, setBody] = useState("");
+  const handleCreateNotes = async (e) => {
+    e.preventDefault();
+    if (title && synopsis && body) {
+      const notesBody = { username, title, synopsis, body };
+      const createNotes = await fetch(
+        `http://localhost:8081/${username}/notes/new`,
+        {
+          method: "POST",
+          body: JSON.stringify(notesBody),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const notesCreated = await createNotes.json();
+
+      if (notesCreated.status !== 400) {
+        toast.success(
+          "Notes written successfully, redirecting to explore page"
+        );
+        setTimeout(() => navigate("/explore-notes"), 3000);
+      } else {
+        console.log(notesCreated);
+        toast.error("Something went wrong while writing your new notes");
+      }
+    } else {
+      toast.info("One of the fields is empty");
+      return;
+    }
+  };
   return (
     <>
       <HomeFeedNav />
@@ -50,7 +80,7 @@ const Studio = () => {
         <h2 className="studio__container--title">
           write your notes {username}
         </h2>
-        <form action="">
+        <form onSubmit={handleCreateNotes}>
           <div className="form-group">
             <label
               htmlFor="notes_title"
@@ -60,10 +90,11 @@ const Studio = () => {
             </label>
             <input
               type="text"
-              name=""
+              name="title"
               id="notes_title"
               className="form-text-input u-input-border-fix input-placeholder-fix"
               placeholder="e.g How to connect mssql with express step by step"
+              onChange={(e) => setTitle(e.target.value)}
             />
           </div>
           <div className="form-group">
@@ -72,10 +103,11 @@ const Studio = () => {
             </label>
             <input
               type="text"
-              name=""
+              name="synopsis"
               id="synopsis"
               className="form-text-input u-input-border-fix input-placeholder-fix"
               placeholder="a step by step guide on how to connect mssql with express"
+              onChange={(e) => setSynopsis(e.target.value)}
             />
           </div>
           <div>
@@ -84,15 +116,13 @@ const Studio = () => {
             </label>
             <ReactQuill
               theme="snow"
-              value={value}
-              onChange={(e) => setValue(e.target.value)}
               modules={modules}
               formats={formats}
               className="editor"
-              ref={quillRef}
-            >
-              <div className="editing-area"></div>
-            </ReactQuill>
+              value={body}
+              onChange={(content) => setBody(content)}
+              name="body"
+            ></ReactQuill>
           </div>
           <div className="buttons">
             <button className="btn btn--save">Save</button>

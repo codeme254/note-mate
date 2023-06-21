@@ -2,10 +2,12 @@
 import sql from "mssql";
 import { config } from "../db/config.js";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 const pool = new sql.ConnectionPool(config.sql);
 await pool.connect();
 const bcryptSalt = bcrypt.genSaltSync(10);
+const jwtSalt = config.jwtSalt;
 
 export const getAllUsers = async (req, res) => {
   try {
@@ -59,7 +61,6 @@ const checkIfUserExists = async (username) => {
       .request()
       .input("username", sql.VarChar, username)
       .query("SELECT * FROM users WHERE username = @username");
-    console.log(`we found ${user.recordset.length} users`);
     if (user.recordset.length === 0) {
       return false;
     } else {
@@ -197,4 +198,64 @@ export const deleteUserInformation = async (req, res) => {
   } finally {
     sql.close();
   }
+};
+
+export const login = async (req, res) => {
+  let { username, password } = req.body;
+  const userExists = await checkIfUserExists(username);
+  if (userExists) {
+    try {
+      const user = await pool
+        .request()
+        .input("username", sql.VarChar, username)
+        .input("password", sql.VarChar, password)
+        .query("SELECT * FROM users WHERE username = @username");
+      // res.send(user.recordset[0])
+      if (user.recordset[0]) {
+        const userLoggingIn = user.recordset[0];
+        const passwordHash = userLoggingIn.password;
+        if (bcrypt.compareSync(password, passwordHash)) {
+          // sign with jwt
+          jwt.sign(
+            {
+              username,
+              firstName: userLoggingIn.firstName,
+              lastName: userLoggingIn.lastName,
+            },
+            jwtSalt,
+            {},
+            (err, token) => {
+              if (err) throw err;
+              res.cookie("token", token).json(username);
+            }
+          );
+          // res.status(200).json({ message: "Logged in successfully"})
+        } else {
+          res.status(404).json({ message: "Wrong username or password" });
+        }
+      } else {
+        res.status(400).json({ message: "Wrong username or password" });
+      }
+    } catch (e) {
+      res.json(e.message);
+    }
+  } else {
+    res.status(400).json({ message: "NO user with that username" });
+  }
+};
+
+export const profile = async (req, res) => {
+  const { token } = req.cookies;
+  if (!token) {
+    // console.log("No token provided")
+    return res.status(401).json({ error: "Token not provided" });
+  }
+  jwt.verify(token, jwtSalt, {}, (err, info) => {
+    if (err) {
+      // console.log("Invalid token")
+      return res.status(401).json({ error: "Invalid token" });
+    }
+    console.log(info);
+    res.json(info);
+  });
 };

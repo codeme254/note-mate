@@ -1,10 +1,12 @@
 .notes-preview {
   width: 65rem;
+  max-width: 65rem;
+  overflow: hidden;
   margin: 2rem auto;
   padding: 1rem;
   box-shadow: 0 0 0 1px rgba(14, 19, 24, 0.07), 0 2px 8px rgba(14, 19, 24, 0.25);
   display: grid;
-  grid-template-columns: .1fr .9fr;
+  grid-template-columns: 0.1fr 0.9fr;
   border-radius: 5px;
 }
 
@@ -63,7 +65,7 @@
   align-items: center;
   margin-top: 2rem;
   justify-content: space-between;
-  width: 100%!important;
+  width: 100% !important;
 }
 
 .notes-controls__control {

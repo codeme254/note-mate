@@ -1,10 +1,39 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { UserContext } from "../../Helpers/Context";
+import { useContext } from "react";
+import { toast } from "react-toastify";
 import "./Login.css";
 const Login = () => {
+  const { username, setUsername } = useContext(UserContext);
+  const navigate = useNavigate();
+  const { register, handleSubmit } = useForm();
+
+  const onLoginUser = async (data) => {
+    const response = await fetch("http://localhost:8081/users/auth/login", {
+      method: "POST",
+      body: JSON.stringify(data),
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    // console.log(response)
+    // const userLoggedIn = await response.json();
+    // console.log(userLoggedIn)
+    if (response.status === 200) {
+      toast.success("Login successful");
+      setUsername(data.username);
+      navigate("/explore-notes");
+    } else {
+      toast.error("Wrong credentials");
+    }
+  };
+
   return (
     <div className="log-in-container">
       <h2 className="form-page-title">Login into your account</h2>
-      <form action="" className="log-in-form">
+      <form onSubmit={handleSubmit(onLoginUser)} className="log-in-form">
         <div className="form-group">
           <label htmlFor="username" className="form-group-lable">
             Enter your username
@@ -14,6 +43,7 @@ const Login = () => {
             className="form-text-input"
             placeholder="username"
             id="username"
+            {...register("username")}
           />
         </div>
         <div className="form-group">
@@ -25,6 +55,7 @@ const Login = () => {
             className="form-text-input"
             placeholder="password"
             id="password"
+            {...register("password")}
           />
         </div>
 

@@ -1,9 +1,4 @@
-import {
-  Page,
-  Text,
-  Document,
-  StyleSheet
-} from "@react-pdf/renderer";
+import { Page, Text, Document, StyleSheet } from "@react-pdf/renderer";
 const styles = StyleSheet.create({
   title: {
     textDecoration: "underline",
@@ -23,7 +18,7 @@ const styles = StyleSheet.create({
   body: {
     textAlign: "justify",
     lineHeight: 1.8,
-    color: "#222"
+    color: "#222",
   },
   page: {
     padding: 20,

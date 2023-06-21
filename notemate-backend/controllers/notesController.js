@@ -17,7 +17,9 @@ const checkIfUserExists = async (username) => {
 
 export const getNotes = async (req, res) => {
   try {
-    const notes = await pool.request().query("SELECT * FROM notes");
+    const notes = await pool
+      .request()
+      .query("SELECT * FROM notes ORDER BY dateCreated DESC");
     if (notes.recordset.length == 0) {
       res.status(204).json({ message: "No notes were found at this time" });
     } else {
