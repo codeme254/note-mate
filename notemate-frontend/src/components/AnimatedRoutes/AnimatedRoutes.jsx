@@ -7,6 +7,7 @@ import Temp from "../../pages/Temp/Temp";
 import Community from "../../pages/Community/Community";
 import ExploreNotes from "../../pages/ExploreNotes/ExploreNotes";
 import Studio from "../../pages/Studio/Studio";
+import UserNotes from "../../pages/UserNotes/UserNotes";
 import { AnimatePresence } from "framer-motion";
 const AnimatedRoutes = () => {
   const location = useLocation();
@@ -21,6 +22,7 @@ const AnimatedRoutes = () => {
         <Route path="/community" element={<Community />} />
         <Route path="/explore-notes" element={<ExploreNotes />} />
         <Route path="/studio" element={<Studio />} />
+        <Route path="/my-notes" element={<UserNotes />} />
       </Routes>
     </AnimatePresence>
   );

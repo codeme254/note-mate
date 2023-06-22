@@ -55,6 +55,10 @@ body {
   color: var(--color-secondary);
 }
 
+.u-delete {
+  background-color: red !important;
+}
+
 .u-dark-fix {
   color: var(--color-blue-dark) !important;
 }

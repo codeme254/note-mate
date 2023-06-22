@@ -86,8 +86,27 @@ export const deleteNote = (req, res) => {
   res.send("Delete a note using this route");
 };
 
-export const getNotesByUser = (req, res) => {
-  res.send("Get notes by a certain user");
+export const getNotesByUser = async (req, res) => {
+  const { username } = req.params;
+  if (await checkIfUserExists(username)) {
+    try {
+      const notesForUser = await pool
+        .request()
+        .input("username", sql.VarChar, username)
+        .query("SELECT * FROM notes WHERE username = @username");
+      if (notesForUser.recordset.length === 0) {
+        res
+          .status(404)
+          .json({ message: `${username} has not taken any notes yet` });
+      } else {
+        res.status(200).json(notesForUser.recordset);
+      }
+    } catch (e) {
+      res.json(e.message);
+    }
+  } else {
+    res.status(404).json({ message: `User does not exist` });
+  }
 };
 
 export const getSpecificNoteByUser = (req, res) => {

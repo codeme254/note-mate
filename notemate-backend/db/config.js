@@ -12,7 +12,7 @@ const {
   SQL_USER,
   SQL_PWD,
   SQL_DB,
-  JWT_SALT
+  JWT_SALT,
 } = process.env;
 
 const sqlEncrypt = process.env.SQL_ENCRYPT === "true";
