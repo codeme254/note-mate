@@ -11,6 +11,8 @@ const UserNotes = () => {
   const [userNotes, setUserNotes] = useState([]);
   useEffect(() => {
     const fetchUserNotes = async () => {
+      if (!username) return;
+      console.log(`http://localhost:8081/${username}/notes`);
       const response = await fetch(`http://localhost:8081/${username}/notes`, {
         method: "GET",
         headers: {
@@ -21,7 +23,7 @@ const UserNotes = () => {
       setUserNotes(responseData);
     };
     fetchUserNotes();
-  }, []);
+  }, [username]);
   return (
     <>
       <HomeFeedNav />
@@ -35,6 +37,7 @@ const UserNotes = () => {
         ) : (
           userNotes.map((notes, i) => (
             <UserNote
+              key={i}
               title={notes.title}
               synopsis={notes.synopsis}
               dateCreated={notes.dateCreated}

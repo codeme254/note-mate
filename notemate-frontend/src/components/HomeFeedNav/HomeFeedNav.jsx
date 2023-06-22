@@ -36,7 +36,11 @@ const HomeFeedNav = () => {
           <LinkIcon to="/explore-notes" label="explore" icon={<GiRead />} />
           <LinkIcon to="/studio" label="new note" icon={<BsPencilSquare />} />
           <LinkIcon to="/my-notes" label="my notes" icon={<FiBookOpen />} />
-          <LinkIcon to="" label="my account" icon={<RiAccountCircleFill />} />
+          <LinkIcon
+            to="/my-account"
+            label="my account"
+            icon={<RiAccountCircleFill />}
+          />
           <LinkIcon
             to="/community"
             label="community"
