@@ -138,14 +138,15 @@ export const createUser = async (req, res) => {
 
 const getUserInformation = async (username) => {
   try {
-    const user = await pool.request()
-    .input('username', sql.VarChar, username)
-    .query('SELECT * FROM users WHERE username = @username')
+    const user = await pool
+      .request()
+      .input("username", sql.VarChar, username)
+      .query("SELECT * FROM users WHERE username = @username");
     return user.recordset[0];
   } catch (e) {
-    console.log(e.message)
+    console.log(e.message);
   }
-}
+};
 // console.log(await getUserInformation('vike'))
 
 export const editUserInformation = async (req, res) => {
@@ -155,9 +156,8 @@ export const editUserInformation = async (req, res) => {
     // check if the user to be updated indeed exists
     const userExists = await checkIfUserExists(username);
     if (userExists) {
-      const currentUserInformation = await getUserInformation(username)
-      const { firstName, lastName, emailAddress, password } =
-        req.body;
+      const currentUserInformation = await getUserInformation(username);
+      const { firstName, lastName, emailAddress, password } = req.body;
       const newEmailExists = await checkIfEmailIsTaken(emailAddress);
       if (newEmailExists) {
         res.status(409).json({ message: "Email address already taken" });
@@ -182,9 +182,7 @@ export const editUserInformation = async (req, res) => {
         .json({ message: `There is no user with the username ${username}` });
     }
   } catch (e) {
-    res
-      .status(400)
-      .json(e.message);
+    res.status(400).json(e.message);
   } finally {
     sql.close();
   }

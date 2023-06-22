@@ -16,7 +16,7 @@ const UserAccount = () => {
   const [emailAddress, setEmailAddress] = useState("");
   const [joinDate, setJoinDate] = useState("");
   const [formShown, setFormShown] = useState(false);
-  const [textOnButton, setTextOnButton] = useState('Update my information')
+  const [textOnButton, setTextOnButton] = useState("Update my information");
   const formRef = useRef(null);
   const schema = yup.object().shape({
     firstName: yup
@@ -79,7 +79,9 @@ const UserAccount = () => {
     formShown
       ? formRef.current.classList.remove("update-form-inactive")
       : formRef.current.classList.add("update-form-inactive");
-    formShown ? setTextOnButton('Close update window') : setTextOnButton('Update my information')
+    formShown
+      ? setTextOnButton("Close update window")
+      : setTextOnButton("Update my information");
   };
   return (
     <section className="user-account">
