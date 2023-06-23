@@ -20,6 +20,7 @@ const UserNotes = () => {
         },
       });
       const responseData = await response.json();
+      console.log(responseData);
       setUserNotes(responseData);
     };
     fetchUserNotes();
@@ -38,6 +39,7 @@ const UserNotes = () => {
           userNotes.map((notes, i) => (
             <UserNote
               key={i}
+              id={notes.notes_id}
               title={notes.title}
               synopsis={notes.synopsis}
               dateCreated={notes.dateCreated}

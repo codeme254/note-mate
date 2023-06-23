@@ -5,6 +5,7 @@ USE notemate;
 -- username, title, synopsis, claps, body, dateCreated, lastUpdated
 
 CREATE TABLE notes (
+	notes_id VARCHAR(90) UNIQUE NOT NULL,
 	username VARCHAR(50) NOT NULL,
 	title VARCHAR(80) NOT NULL,
 	synopsis VARCHAR(500) NOT NULL, 
@@ -65,3 +66,4 @@ INSERT INTO notes (username, title, synopsis, body) VALUES ('gracebaker', 'runni
 INSERT INTO notes (username, title, synopsis, body) VALUES ('sophiehill', 'How to fix your bicycle', 'Learning how simple it can be to fix your bicycle', 'Fixing a bicycle is very easy, you will need the follwing equipments');
 
 SELECT * FROM notes;
+

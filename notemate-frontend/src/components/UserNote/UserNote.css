@@ -44,7 +44,8 @@
   align-items: center;
 }
 
-.user-note__controls button {
+.user-note__controls__button {
+  text-decoration: none;
   display: flex;
   align-items: center;
   border: none;

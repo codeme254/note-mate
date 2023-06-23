@@ -4,11 +4,13 @@ import {
   AiOutlineFilePdf,
   AiOutlineDownload,
 } from "react-icons/ai";
+import { Link } from "react-router-dom";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import "./NotesPreview.css";
 import NotesPDF from "./NotesPDF";
 
 const NotesPreview = ({
+  id,
   firstName,
   lastName,
   title,
@@ -39,6 +41,11 @@ const NotesPreview = ({
             dangerouslySetInnerHTML={{ __html: bodyPreview }}
           />
           <div className="notes-controls">
+            <Link to={`/read/${id}`} className="notes-controls__control">
+              <AiOutlineLike />
+              <p>read</p>
+            </Link>
+
             <button className="notes-controls__control">
               <AiOutlineLike />
               <p>clap</p>

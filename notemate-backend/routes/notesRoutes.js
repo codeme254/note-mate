@@ -10,7 +10,7 @@ import {
 const notesRoutes = (app) => {
   app.route("/notes").get(getNotes);
 
-  app.route("/notes/:noteTitle").get(getNote);
+  app.route("/notes/:notesID").get(getNote);
 
   app.route("/:username/notes").get(getNotesByUser);
 

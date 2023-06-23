@@ -79,6 +79,7 @@ const ExploreNotes = () => {
           notes.map((note, i) => (
             <NotesPreview
               key={i}
+              id={note.notes_id}
               firstName={note.firstName}
               lastName={note.lastName}
               title={note.title}

@@ -1,3 +1,4 @@
+import crypto from "crypto";
 import sql from "mssql";
 import { config } from "../db/config.js";
 const pool = new sql.ConnectionPool(config.sql);
@@ -33,18 +34,16 @@ export const getNotes = async (req, res) => {
 };
 
 export const getNote = async (req, res) => {
-  let { noteTitle } = req.params;
+  let { notesID } = req.params;
   try {
     const note = await pool
       .request()
-      .input("noteTitle", sql.VarChar, noteTitle)
-      .query("SELECT * FROM notes WHERE title = @noteTitle");
+      .input("noteID", sql.VarChar, notesID)
+      .query("SELECT * FROM notes WHERE notes_id = @noteID");
     if (note.recordset.length === 0) {
-      res
-        .status(204)
-        .json({ message: "We didn't find any note(s) with that title" });
+      res.status(404).json({ message: "Notes not found" });
     } else {
-      res.status(200).json(note);
+      res.status(200).json(note.recordset[0]);
     }
   } catch (error) {
     res.status(400).json({
@@ -57,16 +56,18 @@ export const createNote = async (req, res) => {
   const { username } = req.params;
   const userExists = await checkIfUserExists(username);
   if (userExists) {
+    const notes_id = crypto.randomUUID();
     try {
       const { title, synopsis, body } = req.body;
       const newNote = await pool
         .request()
+        .input("notes_id", sql.VarChar, notes_id)
         .input("username", sql.VarChar, username)
         .input("title", sql.VarChar, title)
         .input("synopsis", sql.VarChar, synopsis)
         .input("body", sql.VarChar, body)
         .query(
-          "INSERT INTO notes (username, title, synopsis, body) VALUES (@username, @title, @synopsis, @body)"
+          "INSERT INTO notes (notes_id, username, title, synopsis, body) VALUES (@notes_id, @username, @title, @synopsis, @body)"
         );
 
       res.status(200).json({ message: "New note created successfuly" });
@@ -95,9 +96,7 @@ export const getNotesByUser = async (req, res) => {
         .input("username", sql.VarChar, username)
         .query("SELECT * FROM notes WHERE username = @username");
       if (notesForUser.recordset.length === 0) {
-        res
-          .status(404)
-          .json({ message: `${username} has not taken any notes yet` });
+        res.status(404).json([]);
       } else {
         res.status(200).json(notesForUser.recordset);
       }
@@ -110,5 +109,6 @@ export const getNotesByUser = async (req, res) => {
 };
 
 export const getSpecificNoteByUser = (req, res) => {
-  res.send("Get a single note by a user");
+  // res.send("Get a single note by a user");
+  // 4fd9e500-83ec-4171-96ac-e34f9ae7dbf3
 };

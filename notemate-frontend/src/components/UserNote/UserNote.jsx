@@ -1,8 +1,9 @@
 import "./UserNote.css";
+import { Link } from "react-router-dom";
 import { BsPencilSquare } from "react-icons/bs";
 import { BiLinkExternal } from "react-icons/bi";
 import { MdOutlineDeleteOutline } from "react-icons/md";
-const UserNote = ({ title, synopsis, body, dateCreated }) => {
+const UserNote = ({ id, title, synopsis, body, dateCreated }) => {
   return (
     <div className="user-note">
       <h2 className="user-note__title">{title}</h2>
@@ -15,15 +16,15 @@ const UserNote = ({ title, synopsis, body, dateCreated }) => {
         dangerouslySetInnerHTML={{ __html: body }}
       />
       <div className="user-note__controls">
-        <button>
+        <Link to={`/read/${id}`} className="user-note__controls__button">
           <BiLinkExternal />
           <span>read notes</span>
-        </button>
-        <button>
+        </Link>
+        <button className="user-note__controls__button">
           <BsPencilSquare />
           <span>update notes</span>
         </button>
-        <button className="u-delete">
+        <button className="u-delete user-note__controls__button">
           <MdOutlineDeleteOutline />
           <span>Delete notes</span>
         </button>
