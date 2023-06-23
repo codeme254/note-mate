@@ -88,7 +88,10 @@ const UserAccount = () => {
       <HomeFeedNav />
       <h2 className="u-center">Account for {username}</h2>
       <div className="account-controls">
-        <div className="account__avatar">JV</div>
+        <div className="account__avatar">
+          {" "}
+          {firstName && lastName ? `${firstName[0]}${lastName[0]}` : null}
+        </div>
         <div className="account-controls__right">
           <p className="account-controls__text">
             You joined note-mate on {new Date(`${joinDate}`).toLocaleString()}
