@@ -43,7 +43,7 @@ const NotesPreview = ({
           <div className="notes-controls">
             <Link to={`/read/${id}`} className="notes-controls__control">
               <AiOutlineLike />
-              <p>read</p>
+              <p>read full</p>
             </Link>
 
             <button className="notes-controls__control">
