@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AnimatedRoutes from "./components/AnimatedRoutes/AnimatedRoutes";
 import { UserContext } from "./Helpers/Context";
 import { useState } from "react";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   const [username, setUsername] = useState("");
