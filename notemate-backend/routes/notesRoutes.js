@@ -17,7 +17,7 @@ const notesRoutes = (app) => {
   app.route("/:username/notes/new").post(createNote);
 
   app
-    .route("/:username/:noteTitle")
+    .route("/:username/:noteId")
     .get(getSpecificNoteByUser)
     .put(updateNote)
     .delete(deleteNote);

@@ -11,6 +11,7 @@ import UserNotes from "../../pages/UserNotes/UserNotes";
 import UserAccount from "../../pages/UserAccount/UserAccount";
 import NotePage from "../../pages/NotePage/NotePage";
 import { AnimatePresence } from "framer-motion";
+import UpdateNote from "../../pages/UpdateNote/UpdateNote";
 const AnimatedRoutes = () => {
   const location = useLocation();
   return (
@@ -27,6 +28,7 @@ const AnimatedRoutes = () => {
         <Route path="/my-notes" element={<UserNotes />} />
         <Route path="/my-account" element={<UserAccount />} />
         <Route path="/read/:notes_id" element={<NotePage />} />
+        <Route path="/update/:notes_id" element={<UpdateNote />} />
       </Routes>
     </AnimatePresence>
   );

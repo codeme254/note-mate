@@ -20,10 +20,10 @@ const UserNote = ({ id, title, synopsis, body, dateCreated }) => {
           <BiLinkExternal />
           <span>read notes</span>
         </Link>
-        <button className="user-note__controls__button">
+        <Link to={`/update/${id}`} className="user-note__controls__button">
           <BsPencilSquare />
           <span>update notes</span>
-        </button>
+        </Link>
         <button className="u-delete user-note__controls__button">
           <MdOutlineDeleteOutline />
           <span>Delete notes</span>

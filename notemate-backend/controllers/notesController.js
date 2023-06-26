@@ -79,8 +79,35 @@ export const createNote = async (req, res) => {
   }
 };
 
-export const updateNote = (req, res) => {
-  res.send("Update a note using this route");
+export const updateNote = async (req, res) => {
+  const { username, noteId } = req.params;
+
+  const userExists = await checkIfUserExists(username);
+  if (userExists) {
+    try {
+      const note = await pool
+        .request()
+        .input("noteId", sql.VarChar, noteId)
+        .query("SELECT * FROM notes WHERE notes_id = @noteID");
+      if (note.recordset.length === 0)
+        return res.status(404).json({ message: "Not found" });
+      const { title, synopsis, body } = req.body;
+      const updateNote = await pool
+        .request()
+        .input("noteId", sql.VarChar, noteId)
+        .input("title", sql.VarChar, title)
+        .input("synopsis", sql.VarChar, synopsis)
+        .input("body", sql.VarChar, body)
+        .query(
+          "UPDATE notes SET title = @title, synopsis = @synopsis, body = @body, lastUpdated = CURRENT_TIMESTAMP WHERE notes_id = @noteId"
+        );
+      res.status(200).json({ message: "Notes updated successful" });
+    } catch (e) {
+      res.json(e.message);
+    }
+  } else {
+    return res.status(404).json({ message: "User does not exist" });
+  }
 };
 
 export const deleteNote = (req, res) => {

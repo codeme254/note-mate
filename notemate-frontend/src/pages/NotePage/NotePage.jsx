@@ -9,8 +9,6 @@ import { GiPartyPopper } from "react-icons/gi";
 const NotePage = () => {
   const { notes_id } = useParams();
   const [notesData, setNotesData] = useState(null);
-  // http://localhost:8081/notes/4fd9e500-83ec-4171-96ac-e34f9ae7dbf3
-  // body claps dateCreated lastUpdated notes_id  synopsis  title  username
   useEffect(() => {
     if (!notes_id) return;
     const getNotes = async () => {
@@ -35,8 +33,7 @@ const NotePage = () => {
               {" "}
               <BsCalendar3 />{" "}
               <span>
-                Created on:{" "}
-                {new Date(`${notesData.dateCreated}`).toLocaleString()}
+                Created on: {new Date(`${notesData.dateCreated}`).toUTCString()}
               </span>
             </p>{" "}
             |{" "}
@@ -45,7 +42,7 @@ const NotePage = () => {
               <BsCalendar3 />{" "}
               <span>
                 Last Updated:{" "}
-                {new Date(`${notesData.lastUpdated}`).toLocaleString()}
+                {new Date(`${notesData.lastUpdated}`).toUTCString()}
               </span>
             </p>{" "}
             |{" "}
