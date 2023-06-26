@@ -268,7 +268,7 @@ export const profile = async (req, res) => {
       // console.log("Invalid token")
       return res.status(401).json({ error: "Invalid token" });
     }
-    console.log(info);
+    // console.log(info);
     res.json(info);
   });
 };

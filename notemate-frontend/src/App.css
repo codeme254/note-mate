@@ -85,6 +85,14 @@ body {
   margin: 0 auto;
 }
 
+#portal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  /* z-index: -1; */
+}
+
 /* .app{
   position: relative;
 } */

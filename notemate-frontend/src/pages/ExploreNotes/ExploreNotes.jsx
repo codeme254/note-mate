@@ -64,7 +64,7 @@ const ExploreNotes = () => {
       <HomeFeedNav />
       <h3 className="u-center">Explore all notes from here</h3>
       <div className="explore-notes__container">
-        <NotesPreview
+        {/* <NotesPreview
           firstName="Dennis"
           lastName="Otwoma"
           title="advantages and disadvantages of nosql databases"
@@ -73,7 +73,7 @@ const ExploreNotes = () => {
           username="zaphdev"
           datePosted={new Date().toDateString()}
           initials="DO"
-        />
+        /> */}
 
         {notes.length > 0 ? (
           notes.map((note, i) => (
@@ -93,7 +93,11 @@ const ExploreNotes = () => {
             />
           ))
         ) : (
-          <h2>We could not get you any notes at this moment</h2>
+          <h2 className="u-center">
+            {" "}
+            Please wait while we fetch you some notes, if this persists, try
+            reloading this page...
+          </h2>
         )}
       </div>
     </>

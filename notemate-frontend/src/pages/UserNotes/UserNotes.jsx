@@ -12,7 +12,7 @@ const UserNotes = () => {
   useEffect(() => {
     const fetchUserNotes = async () => {
       if (!username) return;
-      console.log(`http://localhost:8081/${username}/notes`);
+      // console.log(`http://localhost:8081/${username}/notes`);
       const response = await fetch(`http://localhost:8081/${username}/notes`, {
         method: "GET",
         headers: {
@@ -20,7 +20,7 @@ const UserNotes = () => {
         },
       });
       const responseData = await response.json();
-      console.log(responseData);
+      // console.log(responseData);
       setUserNotes(responseData);
     };
     fetchUserNotes();

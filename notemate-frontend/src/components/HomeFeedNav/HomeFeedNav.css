@@ -39,6 +39,13 @@
   border-radius: 3px;
 }
 
+.home-feed__user{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .home-feed__user--initials {
   --size: 4rem;
   width: var(--size);

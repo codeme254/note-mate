@@ -110,8 +110,23 @@ export const updateNote = async (req, res) => {
   }
 };
 
-export const deleteNote = (req, res) => {
-  res.send("Delete a note using this route");
+export const deleteNote = async (req, res) => {
+  const { username, noteId } = req.params;
+  const userExists = await checkIfUserExists(username);
+  if (!userExists)
+    return res.status(404).json({ message: "User does not exist" });
+  try {
+    const deleteNotes = await pool
+      .request()
+      .input("username", sql.VarChar, username)
+      .input("notes_id", sql.VarChar, noteId)
+      .query(
+        "DELETE FROM notes WHERE username = @username AND notes_id = @notes_id"
+      );
+    res.status(200).json({ message: "Delete done successfully" });
+  } catch (e) {
+    res.status(500).json(e.message);
+  }
 };
 
 export const getNotesByUser = async (req, res) => {
