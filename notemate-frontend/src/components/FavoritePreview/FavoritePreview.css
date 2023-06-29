@@ -27,3 +27,15 @@
   background-color: var(--color-blue-dark);
   color: var(--color-white);
 }
+
+.remove-btn {
+  border: none;
+  outline: none;
+  padding: 1rem;
+  background-color: red;
+  color: var(--color-white);
+  font-weight: bold;
+  margin-top: 1.8rem;
+  border-radius: 5px;
+  cursor: pointer;
+}

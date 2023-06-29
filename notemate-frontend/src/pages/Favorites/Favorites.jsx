@@ -2,6 +2,7 @@ import HomeFeedNav from "../../components/HomeFeedNav/HomeFeedNav";
 import { UserContext } from "../../Helpers/Context";
 import { useContext, useEffect, useState } from "react";
 import FavoritePreview from "../../components/FavoritePreview/FavoritePreview";
+import "./Favorites.css";
 const Favorites = () => {
   const [favorites, setFavorites] = useState([]);
   const { username, _ } = useContext(UserContext);
@@ -30,9 +31,10 @@ const Favorites = () => {
           <h2 className="u-center">
             Hey, {username} , here are your favorites
           </h2>
-          {favorites.map((favorite) => (
+          {favorites.map((favorite, i) => (
             <FavoritePreview
-              key={favorite.id}
+              key={i}
+              id={favorite.favorites_id}
               username={favorite.username}
               title={favorite.title}
               synopsis={favorite.synopsis}
@@ -43,7 +45,7 @@ const Favorites = () => {
           ))}
         </div>
       ) : (
-        <h2>
+        <h2 className="user-guide">
           Hey, {username} , you seem to have no favorites at this moment, visit
           the explore page and create your collection today
         </h2>

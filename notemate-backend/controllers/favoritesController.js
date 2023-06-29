@@ -69,7 +69,16 @@ export const getFavoritesForUser = async (req, res) => {
         .request()
         .input("notes_id", sql.VarChar, favoritesArray[i].notes_id)
         .query("SELECT * FROM notes WHERE notes_id = @notes_id");
-      allFavorites.push(currentFavorite.recordset[0]);
+      const currentFavoriteData = currentFavorite.recordset[0];
+      const currentFavoriteId = {
+        favorites_id: favoritesArray[i].favorites_id,
+      };
+      const currentFavoriteFull = Object.assign(
+        {},
+        currentFavoriteData,
+        currentFavoriteId
+      );
+      allFavorites.push(currentFavoriteFull);
     }
     res.status(200).json(allFavorites);
   } else {
@@ -78,5 +87,14 @@ export const getFavoritesForUser = async (req, res) => {
 };
 
 export const deleteFavorite = async (req, res) => {
-  res.send("Delete a favorite for a user based on an id");
+  const { favorite_id } = req.params;
+  try {
+    const deleteFav = await pool
+      .request()
+      .input("favorite_id", sql.VarChar, favorite_id)
+      .query("DELETE FROM favorites WHERE favorites_id = @favorite_id");
+    res.status(200).json({ message: "Removed from favorites successfully" });
+  } catch (e) {
+    res.status(500).json(e.message);
+  }
 };

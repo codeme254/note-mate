@@ -1,5 +1,7 @@
 import "./FavoritePreview.css";
+import { toast } from "react-toastify";
 const FavoritePreview = ({
+  id,
   title,
   synopsis,
   body,
@@ -7,6 +9,25 @@ const FavoritePreview = ({
   lastUpdated,
   username,
 }) => {
+  const handleDelete = async () => {
+    if (!id) return;
+    const response = await fetch(
+      `http://localhost:8081/favorites/${id}/delete`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const responseData = await response.json();
+    if (response.status === 200) {
+      toast.success(responseData.message);
+      location.reload();
+    } else {
+      toast.error("Something went wrong please try again");
+    }
+  };
   return (
     <div className="favorite">
       <h2 className="favorite__title">{title}</h2>
@@ -21,6 +42,9 @@ const FavoritePreview = ({
       <p className="favorite__meta">
         Last Updated: <span>{lastUpdated}</span>
       </p>
+      <button className="remove-btn" onClick={handleDelete}>
+        Remove from favorites
+      </button>
     </div>
   );
 };
