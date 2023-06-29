@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import userRoutes from "./routes/userRoutes.js";
 import notesRoutes from "./routes/notesRoutes.js";
+import favoritesRoutes from "./routes/favoritesRoutes.js";
 
 const app = express();
 
@@ -29,6 +30,7 @@ app.use(cookieParser());
 // User routes
 userRoutes(app);
 notesRoutes(app);
+favoritesRoutes(app);
 
 app.listen(config.port, () => {
   console.log(`Server is running on port ${config.url}`);
