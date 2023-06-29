@@ -3,7 +3,7 @@ import { UserContext } from "../../Helpers/Context";
 import { useContext, useEffect, useState } from "react";
 import "./HomeFeedNav.css";
 import { GiRead } from "react-icons/gi";
-import { BsPencilSquare } from "react-icons/bs";
+import { BsPencilSquare, BsFillStarFill } from "react-icons/bs";
 import { FiBookOpen } from "react-icons/fi";
 import { RiAccountCircleFill } from "react-icons/ri";
 import { FaPeopleCarry } from "react-icons/Fa";
@@ -49,7 +49,7 @@ const HomeFeedNav = () => {
           <LinkIcon
             to="/favorites"
             label="my favorites"
-            icon={<FaPeopleCarry />}
+            icon={<BsFillStarFill />}
           />
         </div>
       </nav>
