@@ -8,6 +8,9 @@ import { Link } from "react-router-dom";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import "./NotesPreview.css";
 import NotesPDF from "./NotesPDF";
+import { useContext } from "react";
+import { UserContext } from "../../Helpers/Context";
+import { toast } from "react-toastify";
 
 const NotesPreview = ({
   id,
@@ -16,9 +19,29 @@ const NotesPreview = ({
   title,
   synposis,
   bodyPreview,
-  username,
+  username_,
   datePosted,
 }) => {
+  const { username, _ } = useContext(UserContext);
+  // http://localhost:8081/vike/1d0b6865-40ce-411f-8ba3-a47150ce0a15/favorites/new
+  const handleAddToFavorites = async () => {
+    if (!id && !username) return;
+    const addToFavorite = await fetch(
+      `http://localhost:8081/${username}/${id}/favorites/new`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const responseData = await addToFavorite.json();
+    if (responseData.message) {
+      toast.success(responseData.message);
+    } else {
+      toast.error("Something went wrong");
+    }
+  };
   return (
     <>
       <div className="notes-preview">
@@ -32,7 +55,7 @@ const NotesPreview = ({
             {firstName} {lastName}
           </h5>
           <p className="notes-preview__author">
-            By: {username} on {datePosted}
+            By: {username_} on {datePosted}
           </p>
           <h3 className="notes-preview__title">{title}</h3>
           <p className="notes-preview__synopsis">{synposis}</p>
@@ -74,7 +97,10 @@ const NotesPreview = ({
               {/* <p>Download as pdf</p> */}
             </button>
 
-            <button className="notes-controls__control">
+            <button
+              className="notes-controls__control"
+              onClick={handleAddToFavorites}
+            >
               <AiOutlineSave />
               <p>save to favorites</p>
             </button>

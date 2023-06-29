@@ -46,6 +46,11 @@ const HomeFeedNav = () => {
             label="community"
             icon={<FaPeopleCarry />}
           />
+          <LinkIcon
+            to="/favorites"
+            label="my favorites"
+            icon={<FaPeopleCarry />}
+          />
         </div>
       </nav>
 
