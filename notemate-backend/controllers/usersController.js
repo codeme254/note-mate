@@ -10,12 +10,14 @@ const bcryptSalt = bcrypt.genSaltSync(10);
 const jwtSalt = config.jwtSalt;
 
 export const loginRequired = (req, res, next) => {
-  if (req.user) {
+  if (req.cookies.token) {
+    console.log(req.cookies.token)
     next();
   } else {
-    return res.status(401).json({ message: "Unauthorized user!" });
+    res.status(401).json({ message: 'Unauthorized. Login required.' });
   }
 };
+
 
 export const getAllUsers = async (req, res) => {
   try {
@@ -282,5 +284,5 @@ export const profile = async (req, res) => {
 };
 
 export const logout = (req, res) => {
-  res.clearCookie("token").json({ message: "Logged out successfully" });
+  res.cookie("token", null).json({ message: "Logged out successfully" });
 };

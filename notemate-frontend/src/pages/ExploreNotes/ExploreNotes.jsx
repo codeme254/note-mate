@@ -34,7 +34,7 @@ const ExploreNotes = () => {
         const allNotes = await notes.json();
         setNotes(allNotes);
       } catch (error) {
-        console.error("Error fetching notes:", error);
+        console.error("Error fetching notes:");
       }
     };
 

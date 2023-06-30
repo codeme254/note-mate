@@ -7,6 +7,7 @@ import {
   login,
   profile,
   logout,
+  loginRequired
 } from "../controllers/usersController.js";
 const userRoutes = (app) => {
   app.route("/users").get(getAllUsers).post(createUser);
