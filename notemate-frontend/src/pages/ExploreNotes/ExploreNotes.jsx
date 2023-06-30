@@ -2,10 +2,11 @@ import HomeFeedNav from "../../components/HomeFeedNav/HomeFeedNav";
 import NotesPreview from "../../components/NotesPreview/NotesPreview";
 import { useState, useEffect } from "react";
 import "./ExploreNotes.css";
+import apiDomain from "../../utils/utilsDomain";
 
 const getUserFullName = async (username) => {
   const userInformation = await fetch(
-    `http://localhost:8081/users/${username}`,
+    `${apiDomain}/users/${username}`,
     {
       method: "GET",
       headers: {
@@ -25,7 +26,7 @@ const ExploreNotes = () => {
   useEffect(() => {
     const getNotes = async () => {
       try {
-        const notes = await fetch("http://localhost:8081/notes", {
+        const notes = await fetch(`${apiDomain}/notes`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",

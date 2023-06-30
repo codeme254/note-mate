@@ -1,5 +1,6 @@
 import "./FavoritePreview.css";
 import { toast } from "react-toastify";
+import apiDomain from "../../utils/utilsDomain";
 const FavoritePreview = ({
   id,
   title,
@@ -12,7 +13,7 @@ const FavoritePreview = ({
   const handleDelete = async () => {
     if (!id) return;
     const response = await fetch(
-      `http://localhost:8081/favorites/${id}/delete`,
+      `${apiDomain}/favorites/${id}/delete`,
       {
         method: "DELETE",
         headers: {

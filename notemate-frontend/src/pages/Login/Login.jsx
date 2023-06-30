@@ -4,13 +4,15 @@ import { UserContext } from "../../Helpers/Context";
 import { useContext } from "react";
 import { toast } from "react-toastify";
 import "./Login.css";
+import apiDomain from "../../utils/utilsDomain";
+
 const Login = () => {
   const { username, setUsername } = useContext(UserContext);
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
 
   const onLoginUser = async (data) => {
-    const response = await fetch("http://localhost:8081/users/auth/login", {
+    const response = await fetch(`${apiDomain}/users/auth/login`, {
       method: "POST",
       body: JSON.stringify(data),
       credentials: "include",

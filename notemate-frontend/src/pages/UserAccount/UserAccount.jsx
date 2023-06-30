@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from "react-toastify";
+import apiDomain from "../../utils/utilsDomain";
 
 // http://localhost:8081/users/vike
 
@@ -58,7 +59,7 @@ const UserAccount = () => {
   useEffect(() => {
     const fetchCurrentUserData = async () => {
       if (!username) return;
-      const response = await fetch(`http://localhost:8081/users/${username}`, {
+      const response = await fetch(`${apiDomain}/users/${username}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

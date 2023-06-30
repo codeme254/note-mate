@@ -3,6 +3,8 @@ import { UserContext } from "../../Helpers/Context";
 import { useContext, useEffect, useState } from "react";
 import FavoritePreview from "../../components/FavoritePreview/FavoritePreview";
 import "./Favorites.css";
+import apiDomain from "../../utils/utilsDomain";
+
 const Favorites = () => {
   const [favorites, setFavorites] = useState([]);
   const { username, _ } = useContext(UserContext);
@@ -10,7 +12,7 @@ const Favorites = () => {
   useEffect(() => {
     const fetchUserNotes = async () => {
       const favorites = await fetch(
-        `http://localhost:8081/favorites/${username}/all`,
+        `${apiDomain}/favorites/${username}/all`,
         {
           method: "GET",
           headers: {

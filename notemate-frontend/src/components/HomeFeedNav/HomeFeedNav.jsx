@@ -10,6 +10,7 @@ import { FaPeopleCarry } from "react-icons/Fa";
 import { HiOutlineMenuAlt1 } from "react-icons/hi";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import apiDomain from "../../utils/utilsDomain";
 
 // http://localhost:8081/users/michaeljohnson
 // home-feed-nav__nav-active
@@ -23,7 +24,7 @@ const HomeFeedNav = () => {
   const navigate = useNavigate();
   useEffect(() => {
     const fetchUserProfile = async () => {
-      const profile = await fetch("http://localhost:8081/profile", {
+      const profile = await fetch(`${apiDomain}/profile`, {
         credentials: "include",
         method: "GET",
       });
@@ -37,7 +38,7 @@ const HomeFeedNav = () => {
   }, []);
 
   const logoutUser = async () => {
-    const response = await fetch(`http://localhost:8081/users/auth/logout`, {
+    const response = await fetch(`${apiDomain}/users/auth/logout`, {
       method: "POST",
       credentials: "include",
       headers: {

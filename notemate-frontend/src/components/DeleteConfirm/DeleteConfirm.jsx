@@ -3,6 +3,7 @@ import "./DeleteConfirm.css";
 import { useState, useRef, useContext } from "react";
 import { UserContext } from "../../Helpers/Context";
 import { toast } from "react-toastify";
+import apiDomain from "../../utils/utilsDomain";
 
 const DeleteConfirm = ({ isOpen, id, onClose }) => {
   const { username, _ } = useContext(UserContext);
@@ -18,7 +19,7 @@ const DeleteConfirm = ({ isOpen, id, onClose }) => {
   const handleDelete = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`http://localhost:8081/${username}/${id}`, {
+      const response = await fetch(`${apiDomain}/${username}/${id}`, {
         method: "DELETE",
         body: JSON.stringify({ id }),
         headers: {

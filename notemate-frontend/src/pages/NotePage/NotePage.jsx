@@ -5,6 +5,7 @@ import HomeFeedNav from "../../components/HomeFeedNav/HomeFeedNav";
 import { BsCalendar3 } from "react-icons/bs";
 // import {PiHandsClapping} from 'react-icons/bi';
 import { GiPartyPopper } from "react-icons/gi";
+import apiDomain from "../../utils/utilsDomain";
 
 const NotePage = () => {
   const { notes_id } = useParams();
@@ -12,7 +13,7 @@ const NotePage = () => {
   useEffect(() => {
     if (!notes_id) return;
     const getNotes = async () => {
-      const response = await fetch(`http://localhost:8081/notes/${notes_id}`);
+      const response = await fetch(`${apiDomain}/notes/${notes_id}`);
       const responseData = await response.json();
       console.log(responseData);
       setNotesData(responseData);

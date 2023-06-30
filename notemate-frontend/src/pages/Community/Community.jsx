@@ -2,11 +2,13 @@ import { useEffect, useState } from "react";
 import HomeFeedNav from "../../components/HomeFeedNav/HomeFeedNav";
 import CommunityMember from "../../components/CommunityMember/CommunityMember";
 import "./Community.css";
+import apiDomain from "../../utils/utilsDomain";
+
 const Community = () => {
   const [communityMembers, setCommunityMembers] = useState([]);
   useEffect(() => {
     const allUsers = async () => {
-      const users = await fetch("http://localhost:8081/users/", {
+      const users = await fetch(`${apiDomain}/users/`, {
         method: "GET",
         headers: { "Content-Type": "application/json" },
       });

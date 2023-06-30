@@ -8,6 +8,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import apiDomain from "../../utils/utilsDomain";
 
 const SignUp = () => {
   const { username, setUsername } = useContext(UserContext);
@@ -50,7 +51,7 @@ const SignUp = () => {
   });
 
   const onSubmit = async (data) => {
-    const response = await fetch("http://localhost:8081/users", {
+    const response = await fetch(`${apiDomain}/users`, {
       method: "POST",
       body: JSON.stringify(data),
       headers: { "Content-Type": "application/json" },

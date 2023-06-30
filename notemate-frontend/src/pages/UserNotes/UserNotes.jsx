@@ -4,7 +4,7 @@ import HomeFeedNav from "../../components/HomeFeedNav/HomeFeedNav";
 import UserNote from "../../components/UserNote/UserNote";
 import { Link } from "react-router-dom";
 import "./UserNotes.css";
-// http://localhost:8081/vike/notes
+import apiDomain from "../../utils/utilsDomain";
 
 const UserNotes = () => {
   const { username, setUsername } = useContext(UserContext);
@@ -13,7 +13,7 @@ const UserNotes = () => {
     const fetchUserNotes = async () => {
       if (!username) return;
       // console.log(`http://localhost:8081/${username}/notes`);
-      const response = await fetch(`http://localhost:8081/${username}/notes`, {
+      const response = await fetch(`${apiDomain}/${username}/notes`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

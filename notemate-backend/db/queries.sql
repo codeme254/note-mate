@@ -65,5 +65,18 @@ ALTER COLUMN password VARCHAR(255);
 INSERT INTO notes (username, title, synopsis, body) VALUES ('gracebaker', 'running sql in azure', 'explores how to run sql in azure', 'running sql in azure is great');
 INSERT INTO notes (username, title, synopsis, body) VALUES ('sophiehill', 'How to fix your bicycle', 'Learning how simple it can be to fix your bicycle', 'Fixing a bicycle is very easy, you will need the follwing equipments');
 
+
+
 SELECT * FROM notes;
+
+CREATE TABLE favorites (
+  favorites_id VARCHAR(90) UNIQUE NOT NULL,
+  username VARCHAR(50),
+  notes_id VARCHAR(90),
+  FOREIGN KEY (username) REFERENCES users(username),
+  FOREIGN KEY (notes_id) REFERENCES notes(notes_id)
+);
+
+SELECT * FROM favorites;
+
 

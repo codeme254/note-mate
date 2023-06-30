@@ -11,6 +11,7 @@ import NotesPDF from "./NotesPDF";
 import { useContext } from "react";
 import { UserContext } from "../../Helpers/Context";
 import { toast } from "react-toastify";
+import apiDomain from "../../utils/utilsDomain";
 
 const NotesPreview = ({
   id,
@@ -27,7 +28,7 @@ const NotesPreview = ({
   const handleAddToFavorites = async () => {
     if (!id && !username) return;
     const addToFavorite = await fetch(
-      `http://localhost:8081/${username}/${id}/favorites/new`,
+      `${apiDomain}/${username}/${id}/favorites/new`,
       {
         method: "POST",
         headers: {

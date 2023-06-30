@@ -32,6 +32,7 @@ userRoutes(app);
 notesRoutes(app);
 favoritesRoutes(app);
 
-app.listen(config.port, () => {
-  console.log(`Server is running on port ${config.url}`);
+const _PORT = config.port || 5000
+app.listen(_PORT, () => {
+  console.log(`Server is running on port ${_PORT}`);
 });

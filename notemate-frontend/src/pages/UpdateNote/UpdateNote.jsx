@@ -6,6 +6,7 @@ import { useState, useEffect, useContext } from "react";
 import { UserContext } from "../../Helpers/Context";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import "./UpdateNote.css";
+import apiDomain from "../../utils/utilsDomain";
 
 const modules = {
   toolbar: [
@@ -56,7 +57,7 @@ const UpdateNote = () => {
         toast.error(`Unable to update notes at this time`);
         return;
       }
-      const response = await fetch(`http://localhost:8081/notes/${notes_id}`);
+      const response = await fetch(`${apiDomain}/notes/${notes_id}`);
       const responseData = await response.json();
       setTitle(responseData.title);
       setSynopsis(responseData.synopsis);
@@ -84,7 +85,7 @@ const UpdateNote = () => {
       return;
     }
     const response = await fetch(
-      `http://localhost:8081/${username}/${notes_id}`,
+      `${apiDomain}/${username}/${notes_id}`,
       {
         method: "PUT",
         body: JSON.stringify(updateBody),

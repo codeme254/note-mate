@@ -7,6 +7,7 @@ import "react-quill/dist/quill.snow.css";
 import { useState, useRef, useEffect } from "react";
 import HomeFeedNav from "../../components/HomeFeedNav/HomeFeedNav";
 import "./Studio.css";
+import apiDomain from "../../utils/utilsDomain";
 
 const modules = {
   toolbar: [
@@ -48,7 +49,7 @@ const Studio = () => {
     if (title && synopsis && body) {
       const notesBody = { username, title, synopsis, body };
       const createNotes = await fetch(
-        `http://localhost:8081/${username}/notes/new`,
+        `${apiDomain}/${username}/notes/new`,
         {
           method: "POST",
           body: JSON.stringify(notesBody),
