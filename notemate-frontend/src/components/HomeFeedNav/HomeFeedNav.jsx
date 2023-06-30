@@ -1,19 +1,26 @@
 import LinkIcon from "./LinkIcon";
 import { UserContext } from "../../Helpers/Context";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useRef } from "react";
 import "./HomeFeedNav.css";
 import { GiRead } from "react-icons/gi";
 import { BsPencilSquare, BsFillStarFill } from "react-icons/bs";
 import { FiBookOpen } from "react-icons/fi";
 import { RiAccountCircleFill } from "react-icons/ri";
 import { FaPeopleCarry } from "react-icons/Fa";
+import { HiOutlineMenuAlt1 } from "react-icons/hi";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 // http://localhost:8081/users/michaeljohnson
+// home-feed-nav__nav-active
 
 const HomeFeedNav = () => {
   const { username, setUsername } = useContext(UserContext);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [showNav, setShowNav] = useState(false);
+  const navRef = useRef(null);
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchUserProfile = async () => {
       const profile = await fetch("http://localhost:8081/profile", {
@@ -28,10 +35,32 @@ const HomeFeedNav = () => {
     };
     fetchUserProfile();
   }, []);
+
+  const logoutUser = async () => {
+    const response = await fetch(`http://localhost:8081/users/auth/logout`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const responseData = await response.json();
+    setUsername(null);
+    toast.success(responseData.message);
+    navigate("/");
+  };
+
+  function handleToggleNav() {
+    setShowNav(!showNav);
+    if (showNav) {
+      navRef.current.classList.add("home-feed-nav__nav-active");
+    } else {
+      navRef.current.classList.remove("home-feed-nav__nav-active");
+    }
+  }
   return (
     <header className="home-feed-nav">
       <h2 className="home-feed-nav__logo">NoteMate</h2>
-      <nav className="home-feed-nav__nav">
+      <nav className="home-feed-nav__nav" ref={navRef}>
         <div className="home-feed-nav__nav--links">
           <LinkIcon to="/explore-notes" label="explore" icon={<GiRead />} />
           <LinkIcon to="/studio" label="new note" icon={<BsPencilSquare />} />
@@ -57,15 +86,19 @@ const HomeFeedNav = () => {
       <div className="home-feed-nav__user">
         <div className="home-feed__user">
           <div className="home-feed__user--initials">
-            {/* {userData && userData.firstName && userData.lastName
-              ? `${userData.firstName.charAt(0)}${userData.lastName.charAt(0)}`
-              : null} */}
             {firstName && lastName ? `${firstName[0]}${lastName[0]}` : null}
           </div>
           <p className="home-feed__user--name">{username}</p>
         </div>
-        <LinkIcon to="" label="logout" icon={<GiRead />} />
+        {/* <LinkIcon to=""  label="logout" icon={<GiRead />} /> */}
+        <button onClick={logoutUser} className="logout-user-btn">
+          Logout
+        </button>
       </div>
+
+      <button className="feed-button-toggle" onClick={handleToggleNav}>
+        <HiOutlineMenuAlt1 />
+      </button>
     </header>
   );
 };

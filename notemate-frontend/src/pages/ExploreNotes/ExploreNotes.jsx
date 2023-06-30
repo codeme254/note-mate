@@ -1,6 +1,7 @@
 import HomeFeedNav from "../../components/HomeFeedNav/HomeFeedNav";
 import NotesPreview from "../../components/NotesPreview/NotesPreview";
 import { useState, useEffect } from "react";
+import "./ExploreNotes.css";
 
 const getUserFullName = async (username) => {
   const userInformation = await fetch(

@@ -9,6 +9,14 @@ await pool.connect();
 const bcryptSalt = bcrypt.genSaltSync(10);
 const jwtSalt = config.jwtSalt;
 
+export const loginRequired = (req, res, next) => {
+  if (req.user) {
+    next();
+  } else {
+    return res.status(401).json({ message: "Unauthorized user!" });
+  }
+};
+
 export const getAllUsers = async (req, res) => {
   try {
     // establishing a connection to the sql server using the sql object and configuration provided in config.sql
@@ -271,4 +279,8 @@ export const profile = async (req, res) => {
     // console.log(info);
     res.json(info);
   });
+};
+
+export const logout = (req, res) => {
+  res.clearCookie("token").json({ message: "Logged out successfully" });
 };
